@@ -1,7 +1,7 @@
 # Source this shell script to get the same environment as the build script
 
 if [ -z "$ENV_ROOT" ]; then
-  if [ -f "./env.source" ]; then
+  if [ -f "./env.sh" ]; then
     ENV_ROOT=`pwd`
     export ENV_ROOT
   fi

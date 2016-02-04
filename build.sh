@@ -3,33 +3,11 @@
 set -e
 set -u
 
-jflag=
-jval=2
-
-while getopts 'j:' OPTION
-do
-  case $OPTION in
-  j)	jflag=1
-        	jval="$OPTARG"
-	        ;;
-  ?)	printf "Usage: %s: [-j concurrency_level] (hint: your cores + 20%%)\n" $(basename $0) >&2
-		exit 2
-		;;
-  esac
-done
-shift $(($OPTIND - 1))
-
-if [ "$jflag" ]
-then
-  if [ "$jval" ]
-  then
-    printf "Option -j specified (%d)\n" $jval
-  fi
-fi
+jval=4
 
 cd `dirname $0`
 ENV_ROOT=`pwd`
-. ./env.source
+. ./env.sh
 
 #if you want a rebuild
 #rm -rf "$BUILD_DIR" "$TARGET_DIR"
@@ -178,6 +156,8 @@ PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --disable-fontconfig \
   --disable-libass \
   --disable-libfreetype
+  # --disable-libfreetype \
+  # --disable-ffprobe
 PATH="$BIN_DIR:$PATH" make
 make install
 make distclean

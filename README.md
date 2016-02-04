@@ -27,7 +27,7 @@ NOTE: If you're going to use the h264 presets, make sure to copy them along the 
 
 On the top-level of the project, run:
 
-	$ . env.source
+	$ . env.sh
 
 You can then enter the source folders and make the compilation yourself
 
