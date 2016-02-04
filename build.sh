@@ -153,8 +153,8 @@ PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --extra-cflags="-I$TARGET_DIR/include" \
   --extra-ldflags="-L$TARGET_DIR/lib" \
   --bindir="$BIN_DIR" \
-  --enable-ffplay \
-  --enable-ffserver \
+  --disable-ffplay \
+  --disable-ffserver \
   --enable-gpl \
   --enable-libass \
   --enable-libfdk-aac \
