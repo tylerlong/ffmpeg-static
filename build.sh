@@ -10,7 +10,7 @@ ENV_ROOT=`pwd`
 . ./env.sh
 
 #if you want a rebuild
-#rm -rf "$BUILD_DIR" "$TARGET_DIR"
+rm -rf "$BUILD_DIR" "$TARGET_DIR" "$DOWNLOAD_DIR" "$BIN_DIR"
 mkdir -p "$BUILD_DIR" "$TARGET_DIR" "$DOWNLOAD_DIR" "$BIN_DIR"
 
 #download and extract package
@@ -155,9 +155,8 @@ PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --disable-libfribidi \
   --disable-fontconfig \
   --disable-libass \
-  --disable-libfreetype
-  # --disable-libfreetype \
-  # --disable-ffprobe
+  --disable-libfreetype \
+  --disable-ffprobe
 PATH="$BIN_DIR:$PATH" make
 make install
 make distclean
