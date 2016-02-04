@@ -19,7 +19,6 @@ else
   BIN_DIR="${BIN_DIR:-$ENV_ROOT/bin}"
 
   export LDFLAGS="-L${TARGET_DIR}/lib"
-  # FIXME: detect OS somehow
   export DYLD_LIBRARY_PATH="${TARGET_DIR}/lib"
   export PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig"
   #export CFLAGS="-I${TARGET_DIR}/include $LDFLAGS -static-libgcc -Wl,-Bstatic -lc"

@@ -8,7 +8,7 @@ just run `./build.sh`, wait and you should get the ffmpeg binary in `./bin/`
 
 ## Build dependencies
 
-	XCode
+  XCode
 
 
 ## Build & "install"
@@ -27,13 +27,13 @@ NOTE: If you're going to use the h264 presets, make sure to copy them along the 
 
 On the top-level of the project, run:
 
-	$ . env.sh
+  $ `. env.sh`
 
 You can then enter the source folders and make the compilation yourself
 
-	$ cd build/ffmpeg-*
-	$ ./configure --prefix=$TARGET_DIR #...
-	# ...
+  $ `cd build/ffmpeg-*`
+  $ `./configure --prefix=$TARGET_DIR #...`
+  # ...
 
 
 ## Remaining links
@@ -41,14 +41,14 @@ You can then enter the source folders and make the compilation yourself
 I'm not sure it's a good idea to statically link those, but it probably
 means the executable won't work across distributions or even across releases.
 
-    $ otool -L ffmpeg
-	ffmpeg:
-		/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 125.2.0)
+    $ `otool -L ffmpeg`
+    ffmpeg:
+      /usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 125.2.0)
 
 
-## TODO
+## todo
 
- * Add some tests to check that video output is correctly generated
-   this would help upgrading the package without too much work
- * OSX's xvidcore does not detect yasm correctly
- * remove remaining libs
+- Add some tests to check that video output is correctly generated
+  - this would help upgrading the package without too much work
+- OSX's xvidcore does not detect yasm correctly
+- remove remaining libs

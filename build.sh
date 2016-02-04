@@ -30,40 +30,40 @@ echo "#### FFmpeg static build ####"
 cd $BUILD_DIR
 
 download \
-	"yasm-1.3.0.tar.gz" \
-	"" \
-	"fc9e586751ff789b34b1f21d572d96af" \
-	"http://www.tortall.net/projects/yasm/releases/"
+  "yasm-1.3.0.tar.gz" \
+  "" \
+  "fc9e586751ff789b34b1f21d572d96af" \
+  "http://www.tortall.net/projects/yasm/releases/"
 
 download \
-	"last_x264.tar.bz2" \
-	"" \
-	"47c7d13d0b4ad4d46dc31c3d8e1df7b4" \
-	"http://download.videolan.org/pub/x264/snapshots/"
+  "last_x264.tar.bz2" \
+  "" \
+  "47c7d13d0b4ad4d46dc31c3d8e1df7b4" \
+  "http://download.videolan.org/pub/x264/snapshots/"
 
 download \
-	"x265_1.9.tar.gz" \
-	"" \
-	"f34a1c4c660ff07511365cb0983cf164" \
-	"https://bitbucket.org/multicoreware/x265/downloads/"
+  "x265_1.9.tar.gz" \
+  "" \
+  "f34a1c4c660ff07511365cb0983cf164" \
+  "https://bitbucket.org/multicoreware/x265/downloads/"
 
 download \
-	"master" \
-	"fdk-aac.tar.gz" \
-	"4c6cd99146dbe9f624da7e9d8ee72a46" \
-	"https://github.com/mstorsjo/fdk-aac/tarball"
+  "master" \
+  "fdk-aac.tar.gz" \
+  "4c6cd99146dbe9f624da7e9d8ee72a46" \
+  "https://github.com/mstorsjo/fdk-aac/tarball"
 
 download \
-	"lame-3.99.5.tar.gz" \
-	"" \
-	"84835b313d4a8b68f5349816d33e07ce" \
-	"http://downloads.sourceforge.net/project/lame/lame/3.99"
+  "lame-3.99.5.tar.gz" \
+  "" \
+  "84835b313d4a8b68f5349816d33e07ce" \
+  "http://downloads.sourceforge.net/project/lame/lame/3.99"
 
 download \
-	"opus-1.1.2.tar.gz" \
-	"" \
-	"1f08a661bc72930187893a07f3741a91" \
-	"http://downloads.xiph.org/releases/opus"
+  "opus-1.1.2.tar.gz" \
+  "" \
+  "1f08a661bc72930187893a07f3741a91" \
+  "http://downloads.xiph.org/releases/opus"
 
 download \
   "libvpx-1.5.0.tar.bz2" \
@@ -72,10 +72,10 @@ download \
   "http://storage.googleapis.com/downloads.webmproject.org/releases/webm"
 
 download \
-	"2.8.6.tar.gz" \
-	"ffmpeg2.8.6.tar.gz" \
-	"c02957939955fe26dbdf9fd765913141" \
-	"https://github.com/FFmpeg/FFmpeg/archive/release"
+  "master" \
+  "ffmpeg.tar.gz" \
+  "4bdc52a8f794be72af1a8d0f1d600628" \
+  "https://github.com/FFmpeg/FFmpeg/tarball"
 
 echo "*** Building yasm ***"
 cd $BUILD_DIR/yasm*

@@ -39,10 +39,10 @@ sh () {
 }
 
 expand_path() {
-	here=`pwd`
-	cd $1
-	echo `pwd -P`
-	cd "$here"
+  here=`pwd`
+  cd $1
+  echo `pwd -P`
+  cd "$here"
 }
 
 usage() {
@@ -101,9 +101,9 @@ if [ "$UNPACK" -ne 0 ]; then
   target_dir=`expand_path "$EXTRACT_DIR"`
   mkdir -p "$target_dir"
   sh cd "$target_dir"
-  
+
   case "$extname" in
-    .tar.gz|.tgz)    
+    .tar.gz|.tgz)
       sh tar xzvf "$cache_file"
     ;;
     .tar.bz2)
@@ -115,4 +115,3 @@ if [ "$UNPACK" -ne 0 ]; then
     ;;
   esac
 fi
-
