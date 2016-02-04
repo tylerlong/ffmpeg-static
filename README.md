@@ -52,3 +52,4 @@ means the executable won't work across distributions or even across releases.
   - this would help upgrading the package without too much work
 - OSX's xvidcore does not detect yasm correctly
 - remove remaining libs
+- Don't disable so many libs

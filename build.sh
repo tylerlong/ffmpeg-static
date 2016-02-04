@@ -14,7 +14,7 @@ rm -rf "$BUILD_DIR" "$TARGET_DIR" "$DOWNLOAD_DIR" "$BIN_DIR"
 mkdir -p "$BUILD_DIR" "$TARGET_DIR" "$DOWNLOAD_DIR" "$BIN_DIR"
 
 #download and extract package
-download(){
+download() {
   filename="$1"
   if [ ! -z "$2" ];then
     filename="$2"
@@ -74,12 +74,12 @@ download \
 download \
   "master" \
   "ffmpeg.tar.gz" \
-  "4bdc52a8f794be72af1a8d0f1d600628" \
+  "7c22546e73e9a3e473682599c59c4e1d" \
   "https://github.com/FFmpeg/FFmpeg/tarball"
 
 echo "*** Building yasm ***"
 cd $BUILD_DIR/yasm*
-./configure --prefix=$TARGET_DIR --bindir=$BIN_DIR
+./configure --prefix=$TARGET_DIR --bindir=$BIN_DIR --enable-static --disable-shared
 make -j $jval
 make install
 
@@ -99,25 +99,25 @@ make install
 echo "*** Building fdk-aac ***"
 cd $BUILD_DIR/mstorsjo-fdk-aac*
 autoreconf -fiv
-./configure --prefix=$TARGET_DIR --disable-shared
+./configure --prefix=$TARGET_DIR --enable-static --disable-shared
 make -j $jval
 make install
 
 echo "*** Building mp3lame ***"
 cd $BUILD_DIR/lame*
-./configure --prefix=$TARGET_DIR --enable-nasm --disable-shared
+./configure --prefix=$TARGET_DIR --enable-nasm --enable-static --disable-shared
 make
 make install
 
 echo "*** Building opus ***"
 cd $BUILD_DIR/opus*
-./configure --prefix=$TARGET_DIR --disable-shared
+./configure --prefix=$TARGET_DIR --enable-static --disable-shared
 make
 make install
 
 echo "*** Building libvpx ***"
 cd $BUILD_DIR/libvpx*
-PATH="$BIN_DIR:$PATH" ./configure --prefix=$TARGET_DIR --disable-examples --disable-unit-tests
+PATH="$BIN_DIR:$PATH" ./configure --prefix=$TARGET_DIR --enable-static --disable-shared --disable-examples --disable-unit-tests
 PATH="$BIN_DIR:$PATH" make -j $jval
 make install
 
@@ -131,8 +131,11 @@ PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --extra-cflags="-I$TARGET_DIR/include" \
   --extra-ldflags="-L$TARGET_DIR/lib" \
   --bindir="$BIN_DIR" \
+  --enable-static \
+  --disable-shared \
   --disable-ffplay \
   --disable-ffserver \
+  --disable-ffprobe \
   --enable-gpl \
   --enable-libass \
   --enable-libfdk-aac \
@@ -148,15 +151,12 @@ PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --disable-securetransport \
   --disable-indev=qtkit \
   --disable-sdl \
-  --enable-static \
-  --disable-shared \
   --disable-libvorbis \
   --disable-libtheora \
   --disable-libfribidi \
   --disable-fontconfig \
   --disable-libass \
-  --disable-libfreetype \
-  --disable-ffprobe
+  --disable-libfreetype
 PATH="$BIN_DIR:$PATH" make
 make install
 make distclean
