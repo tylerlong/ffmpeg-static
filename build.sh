@@ -64,9 +64,9 @@ download \
 	"http://download.videolan.org/pub/x264/snapshots/"
 
 download \
-	"x265_1.7.tar.gz" \
+	"x265_1.9.tar.gz" \
 	"" \
-	"ff31a807ebc868aa59b60706e303102f" \
+	"f34a1c4c660ff07511365cb0983cf164" \
 	"https://bitbucket.org/multicoreware/x265/downloads/"
 
 download \
