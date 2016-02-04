@@ -165,7 +165,15 @@ PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --enable-nonfree \
   --disable-securetransport \
   --disable-indev=qtkit \
-  --disable-sdl
+  --disable-sdl \
+  --enable-static \
+  --disable-shared \
+  --disable-libvorbis \
+  --disable-libtheora \
+  --disable-libfribidi \
+  --disable-fontconfig \
+  --disable-libass \
+  --disable-libfreetype
 PATH="$BIN_DIR:$PATH" make
 make install
 make distclean
