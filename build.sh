@@ -37,13 +37,13 @@ mkdir -p "$BUILD_DIR" "$TARGET_DIR" "$DOWNLOAD_DIR" "$BIN_DIR"
 
 #download and extract package
 download(){
-filename="$1"
-if [ ! -z "$2" ];then
-	filename="$2"
-fi
-../download.pl "$DOWNLOAD_DIR" "$1" "$filename" "$3" "$4"
-#disable uncompress
-CACHE_DIR="$DOWNLOAD_DIR" ../fetchurl "http://cache/$filename"
+  filename="$1"
+  if [ ! -z "$2" ];then
+    filename="$2"
+  fi
+  ../download.pl "$DOWNLOAD_DIR" "$1" "$filename" "$3" "$4"
+  #disable uncompress
+  CACHE_DIR="$DOWNLOAD_DIR" ../fetchurl "http://cache/$filename"
 }
 
 echo "#### FFmpeg static build ####"
@@ -87,11 +87,15 @@ download \
 	"1f08a661bc72930187893a07f3741a91" \
 	"http://downloads.xiph.org/releases/opus"
 
-../fetchurl "http://storage.googleapis.com/downloads.webmproject.org/releases/webm/libvpx-1.4.0.tar.bz2"
+download \
+  "libvpx-1.5.0.tar.bz2" \
+  "" \
+  "49e59dd184caa255886683facea56fca" \
+  "http://storage.googleapis.com/downloads.webmproject.org/releases/webm"
 
 download \
-	"2.8.tar.gz" \
-	"ffmpeg2.8.tar.gz" \
+	"2.8.6.tar.gz" \
+	"ffmpeg2.8.6.tar.gz" \
 	"c02957939955fe26dbdf9fd765913141" \
 	"https://github.com/FFmpeg/FFmpeg/archive/release"
 
