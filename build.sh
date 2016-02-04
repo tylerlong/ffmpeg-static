@@ -82,9 +82,9 @@ download \
 	"http://downloads.sourceforge.net/project/lame/lame/3.99"
 
 download \
-	"opus-1.1.tar.gz" \
+	"opus-1.1.2.tar.gz" \
 	"" \
-	"c5a8cf7c0b066759542bc4ca46817ac6" \
+	"1f08a661bc72930187893a07f3741a91" \
 	"http://downloads.xiph.org/releases/opus"
 
 ../fetchurl "http://storage.googleapis.com/downloads.webmproject.org/releases/webm/libvpx-1.4.0.tar.bz2"
