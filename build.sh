@@ -162,7 +162,10 @@ PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --enable-libvpx \
   --enable-libx264 \
   --enable-libx265 \
-  --enable-nonfree
+  --enable-nonfree \
+  --disable-securetransport \
+  --disable-indev=qtkit \
+  --disable-sdl
 PATH="$BIN_DIR:$PATH" make
 make install
 make distclean
