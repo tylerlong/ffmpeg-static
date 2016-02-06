@@ -48,6 +48,12 @@ cd $BUILD_DIR
 #   "http://netassist.dl.sourceforge.net/project/libpng/libpng16/1.6.21"
 
 download \
+  "zlib-1.2.8.tar.gz" \
+  "" \
+  "" \
+  "http://zlib.net"
+
+download \
   "yasm-1.3.0.tar.gz" \
   "" \
   "fc9e586751ff789b34b1f21d572d96af" \
@@ -95,6 +101,12 @@ download \
   "" \
   "https://github.com/FFmpeg/FFmpeg/tarball"
 
+echo "*** Building zlib ***"
+cd $BUILD_DIR/zlib*
+./configure --prefix=$TARGET_DIR --static
+make -j $jval
+make install
+
 echo "*** Building yasm ***"
 cd $BUILD_DIR/yasm*
 ./configure --prefix=$TARGET_DIR --bindir=$BIN_DIR --enable-static --disable-shared
@@ -116,7 +128,7 @@ make install
 
 echo "*** Building fdk-aac ***"
 cd $BUILD_DIR/mstorsjo-fdk-aac*
-autoreconf -fiv
+autoreconf -fiv # autoreconf: 'configure.ac' or 'configure.in' is required
 ./configure --prefix=$TARGET_DIR --enable-static --disable-shared
 make -j $jval
 make install
