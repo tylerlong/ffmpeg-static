@@ -29,11 +29,23 @@ echo "#### FFmpeg static build ####"
 #this is our working directory
 cd $BUILD_DIR
 
-download \
-  "master" \
-  "libass.tar.gz" \
-  "" \
-  "https://github.com/libass/libass/tarball"
+# download \
+#   "master" \
+#   "libass.tar.gz" \
+#   "" \
+#   "https://github.com/libass/libass/tarball"
+
+# download \
+#   "master" \
+#   "harfbuzz.tar.gz" \
+#   "" \
+#   "https://github.com/behdad/harfbuzz/tarball"
+
+# download \
+#   "libpng-1.6.21.tar.gz" \
+#   "" \
+#   "aca36ec8e0a3b406a5912243bc243717" \
+#   "http://netassist.dl.sourceforge.net/project/libpng/libpng16/1.6.21"
 
 download \
   "yasm-1.3.0.tar.gz" \
@@ -83,12 +95,6 @@ download \
   "" \
   "https://github.com/FFmpeg/FFmpeg/tarball"
 
-download \
-  "libpng-1.6.21.tar.gz" \
-  "" \
-  "aca36ec8e0a3b406a5912243bc243717" \
-  "http://netassist.dl.sourceforge.net/project/libpng/libpng16/1.6.21"
-
 echo "*** Building yasm ***"
 cd $BUILD_DIR/yasm*
 ./configure --prefix=$TARGET_DIR --bindir=$BIN_DIR --enable-static --disable-shared
@@ -133,19 +139,26 @@ PATH="$BIN_DIR:$PATH" ./configure --prefix=$TARGET_DIR --enable-static --disable
 PATH="$BIN_DIR:$PATH" make -j $jval
 make install
 
-echo "*** Building libass ***"
-cd $BUILD_DIR/libass-libass*
-autoreconf -fiv
-./configure --prefix=$TARGET_DIR --enable-static --disable-shared
-make -j $jval
-make install
-
-echo "*** Building libpng ***"
-cd $BUILD_DIR/libpng*
-autoreconf -fiv
-./configure --prefix=$TARGET_DIR --enable-static --disable-shared
-make -j $jval
-make install
+# echo "*** Building libass ***"
+# cd $BUILD_DIR/libass-libass*
+# autoreconf -fiv
+# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+# make -j $jval
+# make install
+#
+# echo "*** Building libpng ***"
+# cd $BUILD_DIR/libpng*
+# autoreconf -fiv
+# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+# make -j $jval
+# make install
+#
+# echo "*** Building harfbuzz ***"
+# cd $BUILD_DIR/behdad-harfbuzz*
+# autoreconf -fiv
+# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+# make -j $jval
+# make install
 
 # FFMpeg
 echo "*** Building FFmpeg ***"
@@ -163,7 +176,6 @@ PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --disable-ffserver \
   --disable-ffprobe \
   --enable-gpl \
-  --enable-libass \
   --enable-libfdk-aac \
   --enable-libfreetype \
   --enable-libmp3lame \
