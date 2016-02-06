@@ -170,8 +170,6 @@ PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --extra-cflags="-I$TARGET_DIR/include" \
   --extra-ldflags="-L$TARGET_DIR/lib" \
   --bindir="$BIN_DIR" \
-  --enable-static \
-  --disable-shared \
   --disable-ffplay \
   --disable-ffserver \
   --disable-ffprobe \
@@ -193,7 +191,12 @@ PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --disable-libtheora \
   --disable-libfribidi \
   --disable-fontconfig \
-  --disable-libfreetype
+  --disable-libfreetype \
+  --disable-lzma \
+  --disable-iconv \
+  --disable-bzlib \
+  --enable-static \
+  --disable-shared
 PATH="$BIN_DIR:$PATH" make
 make install
 make distclean
