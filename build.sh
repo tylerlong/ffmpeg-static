@@ -30,6 +30,12 @@ echo "#### FFmpeg static build ####"
 cd $BUILD_DIR
 
 download \
+  "master" \
+  "libass.tar.gz" \
+  "" \
+  "https://github.com/libass/libass/tarball"
+
+download \
   "yasm-1.3.0.tar.gz" \
   "" \
   "fc9e586751ff789b34b1f21d572d96af" \
@@ -38,19 +44,19 @@ download \
 download \
   "last_x264.tar.bz2" \
   "" \
-  "47c7d13d0b4ad4d46dc31c3d8e1df7b4" \
+  "" \
   "http://download.videolan.org/pub/x264/snapshots/"
 
 download \
-  "x265_1.9.tar.gz" \
+  "master" \
+  "x265.tar.gz" \
   "" \
-  "f34a1c4c660ff07511365cb0983cf164" \
-  "https://bitbucket.org/multicoreware/x265/downloads/"
+  "https://github.com/videolan/x265/tarball"
 
 download \
   "master" \
   "fdk-aac.tar.gz" \
-  "4c6cd99146dbe9f624da7e9d8ee72a46" \
+  "" \
   "https://github.com/mstorsjo/fdk-aac/tarball"
 
 download \
@@ -74,8 +80,14 @@ download \
 download \
   "master" \
   "ffmpeg.tar.gz" \
-  "7c22546e73e9a3e473682599c59c4e1d" \
+  "" \
   "https://github.com/FFmpeg/FFmpeg/tarball"
+
+download \
+  "libpng-1.6.21.tar.gz" \
+  "" \
+  "aca36ec8e0a3b406a5912243bc243717" \
+  "http://netassist.dl.sourceforge.net/project/libpng/libpng16/1.6.21"
 
 echo "*** Building yasm ***"
 cd $BUILD_DIR/yasm*
@@ -90,7 +102,7 @@ PATH="$BIN_DIR:$PATH" make -j $jval
 make install
 
 echo "*** Building x265 ***"
-cd $BUILD_DIR/x265*
+cd $BUILD_DIR/videolan-x265*
 cd build/linux
 PATH="$BIN_DIR:$PATH" cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX="$TARGET_DIR" -DENABLE_SHARED:bool=off ../../source
 make -j $jval
@@ -119,6 +131,20 @@ echo "*** Building libvpx ***"
 cd $BUILD_DIR/libvpx*
 PATH="$BIN_DIR:$PATH" ./configure --prefix=$TARGET_DIR --enable-static --disable-shared --disable-examples --disable-unit-tests
 PATH="$BIN_DIR:$PATH" make -j $jval
+make install
+
+echo "*** Building libass ***"
+cd $BUILD_DIR/libass-libass*
+autoreconf -fiv
+./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+make -j $jval
+make install
+
+echo "*** Building libpng ***"
+cd $BUILD_DIR/libpng*
+autoreconf -fiv
+./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+make -j $jval
 make install
 
 # FFMpeg
@@ -155,7 +181,6 @@ PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --disable-libtheora \
   --disable-libfribidi \
   --disable-fontconfig \
-  --disable-libass \
   --disable-libfreetype
 PATH="$BIN_DIR:$PATH" make
 make install
