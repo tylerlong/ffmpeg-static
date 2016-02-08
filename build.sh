@@ -228,7 +228,6 @@ PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --disable-fontconfig \
   --disable-libfreetype \
   --disable-iconv \
-  --disable-bzlib \
   --enable-static \
   --disable-shared
 PATH="$BIN_DIR:$PATH" make
