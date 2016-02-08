@@ -48,6 +48,12 @@ cd $BUILD_DIR
 #   "http://netassist.dl.sourceforge.net/project/libpng/libpng16/1.6.21"
 
 download \
+  "libiconv-1.14.tar.gz" \
+  "" \
+  "" \
+  "http://ftp.gnu.org/pub/gnu/libiconv"
+
+download \
   "bzip2-1.0.6.tar.gz" \
   "" \
   "" \
@@ -112,6 +118,12 @@ download \
   "ffmpeg.tar.gz" \
   "" \
   "https://github.com/FFmpeg/FFmpeg/tarball"
+
+echo "*** Building iconv ***"
+cd $BUILD_DIR/libiconv-*
+./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+make -j $jval
+make install
 
 echo "*** Building bzip2 ***"
 cd $BUILD_DIR/bzip2-*
@@ -227,7 +239,6 @@ PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --disable-libfribidi \
   --disable-fontconfig \
   --disable-libfreetype \
-  --disable-iconv \
   --enable-static \
   --disable-shared
 PATH="$BIN_DIR:$PATH" make
