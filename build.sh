@@ -48,6 +48,12 @@ cd $BUILD_DIR
 #   "http://netassist.dl.sourceforge.net/project/libpng/libpng16/1.6.21"
 
 download \
+  "xz-5.2.2.tar.gz" \
+  "" \
+  "" \
+  "http://tukaani.org/xz"
+
+download \
   "zlib-1.2.8.tar.gz" \
   "" \
   "" \
@@ -100,6 +106,12 @@ download \
   "ffmpeg.tar.gz" \
   "" \
   "https://github.com/FFmpeg/FFmpeg/tarball"
+
+echo "*** Building xz utils ***"
+cd $BUILD_DIR/xz-*
+./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+make -j $jval
+make install
 
 echo "*** Building zlib ***"
 cd $BUILD_DIR/zlib*
@@ -186,6 +198,7 @@ PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --disable-ffserver \
   --disable-ffprobe \
   --enable-gpl \
+  --enable-nonfree \
   --enable-libfdk-aac \
   --enable-libfreetype \
   --enable-libmp3lame \
@@ -195,7 +208,6 @@ PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --enable-libvpx \
   --enable-libx264 \
   --enable-libx265 \
-  --enable-nonfree \
   --disable-securetransport \
   --disable-indev=qtkit \
   --disable-sdl \
@@ -204,7 +216,6 @@ PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --disable-libfribidi \
   --disable-fontconfig \
   --disable-libfreetype \
-  --disable-lzma \
   --disable-iconv \
   --disable-bzlib \
   --enable-static \
