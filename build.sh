@@ -47,6 +47,12 @@ cd $BUILD_DIR
 #   "aca36ec8e0a3b406a5912243bc243717" \
 #   "http://netassist.dl.sourceforge.net/project/libpng/libpng16/1.6.21"
 
+# download \
+#   "bzip2-1.0.6.tar.gz" \
+#   "" \
+#   "" \
+#   "http://www.bzip.org/1.0.6"
+
 download \
   "xz-5.2.2.tar.gz" \
   "" \
@@ -106,6 +112,12 @@ download \
   "ffmpeg.tar.gz" \
   "" \
   "https://github.com/FFmpeg/FFmpeg/tarball"
+
+# echo "*** Building bzip2 ***"
+# cd $BUILD_DIR/bzip2-*
+# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+# make -j $jval
+# make install
 
 echo "*** Building xz utils ***"
 cd $BUILD_DIR/xz-*
