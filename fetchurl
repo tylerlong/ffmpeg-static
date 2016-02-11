@@ -89,6 +89,8 @@ if [ "$UNPACK" -ne 0 ]; then
 
   if [ "$filename" != "${filename%.tar.gz}" ]; then
     extname=.tar.gz
+  elif [ "$filename" != "${filename%.tar.xz}" ]; then
+    extname=.tar.xz
   elif [ "$filename" != "${filename%.tgz}" ]; then
     extname=.tgz
   elif [ "$filename" != "${filename%.tar.bz2}" ]; then
@@ -103,7 +105,7 @@ if [ "$UNPACK" -ne 0 ]; then
   sh cd "$target_dir"
 
   case "$extname" in
-    .tar.gz|.tgz)
+    .tar.gz|.tar.xz|.tgz)
       sh tar xzvf "$cache_file"
     ;;
     .tar.bz2)
