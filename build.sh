@@ -36,6 +36,18 @@ cd $BUILD_DIR
 #   "https://github.com/libass/libass/tarball"
 
 download \
+  "libffi-3.2.1.tar.gz" \
+  "" \
+  "" \
+  "ftp://sourceware.org/pub/libffi"
+
+download \
+  "glib-2.47.5.tar.xz" \
+  "" \
+  "" \
+  "http://ftp.gnome.org/pub/GNOME/sources/glib/2.47"
+
+download \
   "harfbuzz-1.1.3.tar.bz2" \
   "" \
   "" \
@@ -131,6 +143,13 @@ download \
   "" \
   "https://github.com/FFmpeg/FFmpeg/tarball"
 
+echo "*** Building libffi ***"
+cd $BUILD_DIR/libffi-*
+autoreconf -fiv
+./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+make -j $jval
+make install
+
 echo "*** Building libpng ***"
 cd $BUILD_DIR/libpng*
 autoreconf -fiv
@@ -140,6 +159,13 @@ make install
 
 echo "*** Building gettext ***"
 cd $BUILD_DIR/gettext-*
+autoreconf -fiv
+./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+make -j $jval
+make install
+
+echo "*** Building glib ***"
+cd $BUILD_DIR/glib-*
 autoreconf -fiv
 ./configure --prefix=$TARGET_DIR --enable-static --disable-shared
 make -j $jval
