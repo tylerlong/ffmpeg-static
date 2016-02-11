@@ -41,11 +41,11 @@ download \
   "" \
   "https://www.freedesktop.org/software/harfbuzz/release"
 
-# download \
-#   "libpng-1.6.21.tar.gz" \
-#   "" \
-#   "aca36ec8e0a3b406a5912243bc243717" \
-#   "http://netassist.dl.sourceforge.net/project/libpng/libpng16/1.6.21"
+download \
+  "libpng-1.6.21.tar.gz" \
+  "" \
+  "" \
+  "http://netassist.dl.sourceforge.net/project/libpng/libpng16/1.6.21"
 
 download \
   "gettext-latest.tar.gz" \
@@ -130,6 +130,13 @@ download \
   "ffmpeg.tar.gz" \
   "" \
   "https://github.com/FFmpeg/FFmpeg/tarball"
+
+echo "*** Building libpng ***"
+cd $BUILD_DIR/libpng*
+autoreconf -fiv
+./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+make -j $jval
+make install
 
 echo "*** Building gettext ***"
 cd $BUILD_DIR/gettext-*
@@ -220,13 +227,6 @@ make install
 
 # echo "*** Building libass ***"
 # cd $BUILD_DIR/libass-libass*
-# autoreconf -fiv
-# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared
-# make -j $jval
-# make install
-#
-# echo "*** Building libpng ***"
-# cd $BUILD_DIR/libpng*
 # autoreconf -fiv
 # ./configure --prefix=$TARGET_DIR --enable-static --disable-shared
 # make -j $jval
