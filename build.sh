@@ -48,6 +48,12 @@ cd $BUILD_DIR
 #   "http://netassist.dl.sourceforge.net/project/libpng/libpng16/1.6.21"
 
 download \
+  "freetype-2.6.3.tar.gz" \
+  "" \
+  "" \
+  "http://download.savannah.gnu.org/releases/freetype"
+
+download \
   "libiconv-1.14.tar.gz" \
   "" \
   "" \
@@ -118,6 +124,12 @@ download \
   "ffmpeg.tar.gz" \
   "" \
   "https://github.com/FFmpeg/FFmpeg/tarball"
+
+echo "*** Building freetype ***"
+cd $BUILD_DIR/freetype-*
+./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+make -j $jval
+make install
 
 echo "*** Building iconv ***"
 cd $BUILD_DIR/libiconv-*
@@ -238,7 +250,6 @@ PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --disable-libtheora \
   --disable-libfribidi \
   --disable-fontconfig \
-  --disable-libfreetype \
   --enable-static \
   --disable-shared
 PATH="$BIN_DIR:$PATH" make
