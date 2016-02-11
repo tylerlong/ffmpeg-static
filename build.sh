@@ -48,6 +48,12 @@ download \
 #   "http://netassist.dl.sourceforge.net/project/libpng/libpng16/1.6.21"
 
 download \
+  "gettext-latest.tar.gz" \
+  "" \
+  "" \
+  "http://ftp.gnu.org/pub/gnu/gettext"
+
+download \
   "freetype-2.6.3.tar.gz" \
   "" \
   "" \
@@ -124,6 +130,13 @@ download \
   "ffmpeg.tar.gz" \
   "" \
   "https://github.com/FFmpeg/FFmpeg/tarball"
+
+echo "*** Building gettext ***"
+cd $BUILD_DIR/gettext-*
+autoreconf -fiv
+./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+make -j $jval
+make install
 
 echo "*** Building harfbuzz ***"
 cd $BUILD_DIR/harfbuzz-*
