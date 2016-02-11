@@ -35,11 +35,11 @@ cd $BUILD_DIR
 #   "" \
 #   "https://github.com/libass/libass/tarball"
 
-# download \
-#   "master" \
-#   "harfbuzz.tar.gz" \
-#   "" \
-#   "https://github.com/behdad/harfbuzz/tarball"
+download \
+  "harfbuzz-1.1.3.tar.bz2" \
+  "" \
+  "" \
+  "https://www.freedesktop.org/software/harfbuzz/release"
 
 # download \
 #   "libpng-1.6.21.tar.gz" \
@@ -124,6 +124,13 @@ download \
   "ffmpeg.tar.gz" \
   "" \
   "https://github.com/FFmpeg/FFmpeg/tarball"
+
+echo "*** Building harfbuzz ***"
+cd $BUILD_DIR/harfbuzz-*
+autoreconf -fiv
+./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+make -j $jval
+make install
 
 echo "*** Building freetype ***"
 cd $BUILD_DIR/freetype-*
@@ -212,12 +219,6 @@ make install
 # make -j $jval
 # make install
 #
-# echo "*** Building harfbuzz ***"
-# cd $BUILD_DIR/behdad-harfbuzz*
-# autoreconf -fiv
-# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared
-# make -j $jval
-# make install
 
 # FFMpeg
 echo "*** Building FFmpeg ***"
