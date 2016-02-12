@@ -47,8 +47,3 @@ means the executable won't work across distributions or even across releases.
 
 
 ## notes
-
-```
-brew uninstall glib
-brew install glib --with-static
-```

@@ -10,8 +10,8 @@ ENV_ROOT=`pwd`
 . ./env.sh
 
 #if you want a rebuild
-rm -rf "$BUILD_DIR" "$TARGET_DIR" "$DOWNLOAD_DIR" "$BIN_DIR"
-mkdir -p "$BUILD_DIR" "$TARGET_DIR" "$DOWNLOAD_DIR" "$BIN_DIR"
+rm -rf "$BUILD_DIR" "$TARGET_DIR" "$BIN_DIR"
+mkdir -p "$BUILD_DIR" "$TARGET_DIR" "$BIN_DIR"
 
 #download and extract package
 download() {
@@ -42,10 +42,10 @@ cd $BUILD_DIR
 #   "ftp://sourceware.org/pub/libffi"
 
 # download \
-#   "glib-2.47.5.tar.xz" \
+#   "glib-2.46.0.tar.xz" \
 #   "" \
 #   "" \
-#   "http://ftp.gnome.org/pub/GNOME/sources/glib/2.47"
+#   "https://download.gnome.org/sources/glib/2.46"
 
 # download \
 #   "harfbuzz-1.1.3.tar.bz2" \
@@ -77,17 +77,17 @@ download \
   "" \
   "http://netassist.dl.sourceforge.net/project/libpng/libpng16/1.6.21"
 
-# download \
-#   "gettext-latest.tar.gz" \
-#   "" \
-#   "" \
-#   "http://ftp.gnu.org/pub/gnu/gettext"
+download \
+  "gettext-latest.tar.gz" \
+  "" \
+  "" \
+  "http://ftp.gnu.org/pub/gnu/gettext"
 
-# download \
-#   "freetype-2.6.3.tar.gz" \
-#   "" \
-#   "" \
-#   "http://download.savannah.gnu.org/releases/freetype"
+download \
+  "freetype-2.6.3.tar.gz" \
+  "" \
+  "" \
+  "http://download.savannah.gnu.org/releases/freetype"
 
 download \
   "SDL2-2.0.4.tar.gz" \
@@ -176,7 +176,8 @@ download \
 # echo "*** Building libffi ***"
 # cd $BUILD_DIR/libffi-*
 # autoreconf -fiv
-# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared \
+#   --disable-debug --disable-dependency-tracking
 # make -j $jval
 # make install
 
@@ -206,8 +207,27 @@ autoreconf -fiv
 make -j $jval
 make install
 
-# echo "*** Building gettext ***"
-# cd $BUILD_DIR/gettext-*
+echo "*** Building gettext ***"
+cd $BUILD_DIR/gettext-*
+autoreconf -fiv
+./configure --prefix=$TARGET_DIR --enable-static --disable-shared \
+  --disable-dependency-tracking \
+  --disable-silent-rules \
+  --disable-debug \
+  --with-included-gettext \
+  --with-included-glib \
+  --with-included-libcroco \
+  --with-included-libunistring \
+  --disable-java \
+  --disable-csharp \
+  --without-git \
+  --without-cvs \
+  --without-xz
+make -j $jval
+make install
+
+# echo "*** Building harfbuzz ***"
+# cd $BUILD_DIR/harfbuzz-*
 # autoreconf -fiv
 # ./configure --prefix=$TARGET_DIR --enable-static --disable-shared
 # make -j $jval
@@ -216,22 +236,17 @@ make install
 # echo "*** Building glib ***"
 # cd $BUILD_DIR/glib-*
 # autoreconf -fiv
-# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared \
+#   --disable-maintainer-mode --disable-dependency-tracking \
+#   --disable-silent-rules --disable-dtrace --disable-libelf
 # make -j $jval
 # make install
 
-# echo "*** Building harfbuzz ***"
-# cd $BUILD_DIR/harfbuzz-*
-# autoreconf -fiv
-# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared
-# make -j $jval
-# make install
-#
-# echo "*** Building freetype ***"
-# cd $BUILD_DIR/freetype-*
-# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared
-# make -j $jval
-# make install
+echo "*** Building freetype ***"
+cd $BUILD_DIR/freetype-*
+./configure --prefix=$TARGET_DIR --enable-static --disable-shared --without-harfbuzz
+make -j $jval
+make install
 
 echo "*** Building SDL2 ***"
 cd $BUILD_DIR/SDL2-*
@@ -338,6 +353,7 @@ PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --disable-ffprobe \
   --enable-gpl \
   --enable-nonfree \
+  --enable-libfreetype \
   --enable-libfdk-aac \
   --enable-libmp3lame \
   --enable-libopus \
