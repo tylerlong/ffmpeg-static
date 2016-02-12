@@ -59,11 +59,11 @@ download \
   "" \
   "http://netassist.dl.sourceforge.net/project/libpng/libpng16/1.6.21"
 
-download \
-  "gettext-latest.tar.gz" \
-  "" \
-  "" \
-  "http://ftp.gnu.org/pub/gnu/gettext"
+# download \
+#   "gettext-latest.tar.gz" \
+#   "" \
+#   "" \
+#   "http://ftp.gnu.org/pub/gnu/gettext"
 
 download \
   "freetype-2.6.3.tar.gz" \
@@ -181,24 +181,24 @@ autoreconf -fiv
 make -j $jval
 make install
 
-echo "*** Building gettext ***"
-cd $BUILD_DIR/gettext-*
-autoreconf -fiv
-./configure --prefix=$TARGET_DIR --enable-static --disable-shared \
-  --disable-dependency-tracking \
-  --disable-silent-rules \
-  --disable-debug \
-  --with-included-gettext \
-  --with-included-glib \
-  --with-included-libcroco \
-  --with-included-libunistring \
-  --disable-java \
-  --disable-csharp \
-  --without-git \
-  --without-cvs \
-  --without-xz
-make -j $jval
-make install
+# echo "*** Building gettext ***"
+# cd $BUILD_DIR/gettext-*
+# autoreconf -fiv
+# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared \
+#   --disable-dependency-tracking \
+#   --disable-silent-rules \
+#   --disable-debug \
+#   --with-included-gettext \
+#   --with-included-glib \
+#   --with-included-libcroco \
+#   --with-included-libunistring \
+#   --disable-java \
+#   --disable-csharp \
+#   --without-git \
+#   --without-cvs \
+#   --without-xz
+# make -j $jval
+# make install
 
 echo "*** Building freetype ***"
 cd $BUILD_DIR/freetype-*
