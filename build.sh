@@ -356,7 +356,6 @@ PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --disable-libxcb-shm \
   --disable-libxcb-xfixes \
   --disable-libxcb-shape \
-  --disable-libvorbis \
   --enable-static \
   --disable-shared
 PATH="$BIN_DIR:$PATH" make
