@@ -35,24 +35,6 @@ cd $BUILD_DIR
 #   "" \
 #   "https://github.com/libass/libass/tarball"
 
-# download \
-#   "libffi-3.2.1.tar.gz" \
-#   "" \
-#   "" \
-#   "ftp://sourceware.org/pub/libffi"
-
-# download \
-#   "glib-2.46.0.tar.xz" \
-#   "" \
-#   "" \
-#   "https://download.gnome.org/sources/glib/2.46"
-
-# download \
-#   "harfbuzz-1.1.3.tar.bz2" \
-#   "" \
-#   "" \
-#   "https://www.freedesktop.org/software/harfbuzz/release"
-
 download \
   "libvorbis-1.3.5.tar.gz" \
   "" \
@@ -173,14 +155,6 @@ download \
   "" \
   "https://github.com/FFmpeg/FFmpeg/tarball"
 
-# echo "*** Building libffi ***"
-# cd $BUILD_DIR/libffi-*
-# autoreconf -fiv
-# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared \
-#   --disable-debug --disable-dependency-tracking
-# make -j $jval
-# make install
-
 echo "*** Building libvorbis ***"
 cd $BUILD_DIR/libvorbis*
 ./configure --prefix=$TARGET_DIR --enable-static --disable-shared
@@ -225,22 +199,6 @@ autoreconf -fiv
   --without-xz
 make -j $jval
 make install
-
-# echo "*** Building harfbuzz ***"
-# cd $BUILD_DIR/harfbuzz-*
-# autoreconf -fiv
-# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared
-# make -j $jval
-# make install
-
-# echo "*** Building glib ***"
-# cd $BUILD_DIR/glib-*
-# autoreconf -fiv
-# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared \
-#   --disable-maintainer-mode --disable-dependency-tracking \
-#   --disable-silent-rules --disable-dtrace --disable-libelf
-# make -j $jval
-# make install
 
 echo "*** Building freetype ***"
 cd $BUILD_DIR/freetype-*
@@ -364,18 +322,6 @@ PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --enable-libx265 \
   --disable-securetransport \
   --disable-indev=qtkit \
-  \
-  \
-  --disable-xlib \
-  --disable-indev=x11grab_xcb \
-  --disable-indev=x11grab \
-  --disable-x11grab \
-  --disable-libxcb \
-  --disable-libxcb-shm \
-  --disable-libxcb-xfixes \
-  --disable-libxcb-shape \
-  \
-  \
   --enable-static \
   --disable-shared
 PATH="$BIN_DIR:$PATH" make
