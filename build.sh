@@ -35,41 +35,41 @@ cd $BUILD_DIR
 #   "" \
 #   "https://github.com/libass/libass/tarball"
 
-download \
-  "libffi-3.2.1.tar.gz" \
-  "" \
-  "" \
-  "ftp://sourceware.org/pub/libffi"
+# download \
+#   "libffi-3.2.1.tar.gz" \
+#   "" \
+#   "" \
+#   "ftp://sourceware.org/pub/libffi"
 
-download \
-  "glib-2.47.5.tar.xz" \
-  "" \
-  "" \
-  "http://ftp.gnome.org/pub/GNOME/sources/glib/2.47"
+# download \
+#   "glib-2.47.5.tar.xz" \
+#   "" \
+#   "" \
+#   "http://ftp.gnome.org/pub/GNOME/sources/glib/2.47"
 
-download \
-  "harfbuzz-1.1.3.tar.bz2" \
-  "" \
-  "" \
-  "https://www.freedesktop.org/software/harfbuzz/release"
+# download \
+#   "harfbuzz-1.1.3.tar.bz2" \
+#   "" \
+#   "" \
+#   "https://www.freedesktop.org/software/harfbuzz/release"
+#
+# download \
+#   "libpng-1.6.21.tar.gz" \
+#   "" \
+#   "" \
+#   "http://netassist.dl.sourceforge.net/project/libpng/libpng16/1.6.21"
+#
+# download \
+#   "gettext-latest.tar.gz" \
+#   "" \
+#   "" \
+#   "http://ftp.gnu.org/pub/gnu/gettext"
 
-download \
-  "libpng-1.6.21.tar.gz" \
-  "" \
-  "" \
-  "http://netassist.dl.sourceforge.net/project/libpng/libpng16/1.6.21"
-
-download \
-  "gettext-latest.tar.gz" \
-  "" \
-  "" \
-  "http://ftp.gnu.org/pub/gnu/gettext"
-
-download \
-  "freetype-2.6.3.tar.gz" \
-  "" \
-  "" \
-  "http://download.savannah.gnu.org/releases/freetype"
+# download \
+#   "freetype-2.6.3.tar.gz" \
+#   "" \
+#   "" \
+#   "http://download.savannah.gnu.org/releases/freetype"
 
 download \
   "libiconv-1.14.tar.gz" \
@@ -143,46 +143,46 @@ download \
   "" \
   "https://github.com/FFmpeg/FFmpeg/tarball"
 
-echo "*** Building libffi ***"
-cd $BUILD_DIR/libffi-*
-autoreconf -fiv
-./configure --prefix=$TARGET_DIR --enable-static --disable-shared
-make -j $jval
-make install
+# echo "*** Building libffi ***"
+# cd $BUILD_DIR/libffi-*
+# autoreconf -fiv
+# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+# make -j $jval
+# make install
+#
+# echo "*** Building libpng ***"
+# cd $BUILD_DIR/libpng*
+# autoreconf -fiv
+# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+# make -j $jval
+# make install
+#
+# echo "*** Building gettext ***"
+# cd $BUILD_DIR/gettext-*
+# autoreconf -fiv
+# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+# make -j $jval
+# make install
 
-echo "*** Building libpng ***"
-cd $BUILD_DIR/libpng*
-autoreconf -fiv
-./configure --prefix=$TARGET_DIR --enable-static --disable-shared
-make -j $jval
-make install
+# echo "*** Building glib ***"
+# cd $BUILD_DIR/glib-*
+# autoreconf -fiv
+# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+# make -j $jval
+# make install
 
-echo "*** Building gettext ***"
-cd $BUILD_DIR/gettext-*
-autoreconf -fiv
-./configure --prefix=$TARGET_DIR --enable-static --disable-shared
-make -j $jval
-make install
-
-echo "*** Building glib ***"
-cd $BUILD_DIR/glib-*
-autoreconf -fiv
-./configure --prefix=$TARGET_DIR --enable-static --disable-shared
-make -j $jval
-make install
-
-echo "*** Building harfbuzz ***"
-cd $BUILD_DIR/harfbuzz-*
-autoreconf -fiv
-./configure --prefix=$TARGET_DIR --enable-static --disable-shared
-make -j $jval
-make install
-
-echo "*** Building freetype ***"
-cd $BUILD_DIR/freetype-*
-./configure --prefix=$TARGET_DIR --enable-static --disable-shared
-make -j $jval
-make install
+# echo "*** Building harfbuzz ***"
+# cd $BUILD_DIR/harfbuzz-*
+# autoreconf -fiv
+# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+# make -j $jval
+# make install
+#
+# echo "*** Building freetype ***"
+# cd $BUILD_DIR/freetype-*
+# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+# make -j $jval
+# make install
 
 echo "*** Building iconv ***"
 cd $BUILD_DIR/libiconv-*
@@ -269,13 +269,13 @@ PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --extra-cflags="-I$TARGET_DIR/include" \
   --extra-ldflags="-L$TARGET_DIR/lib" \
   --bindir="$BIN_DIR" \
+  --disable-doc \
   --disable-ffplay \
   --disable-ffserver \
   --disable-ffprobe \
   --enable-gpl \
   --enable-nonfree \
   --enable-libfdk-aac \
-  --enable-libfreetype \
   --enable-libmp3lame \
   --enable-libopus \
   --enable-libtheora \
@@ -285,11 +285,17 @@ PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --enable-libx265 \
   --disable-securetransport \
   --disable-indev=qtkit \
+  --disable-xlib \
+  --disable-indev=x11grab_xcb \
+  --disable-indev=x11grab \
+  --disable-x11grab \
+  --disable-libxcb \
+  --disable-libxcb-shm \
+  --disable-libxcb-xfixes \
+  --disable-libxcb-shape \
   --disable-sdl \
   --disable-libvorbis \
   --disable-libtheora \
-  --disable-libfribidi \
-  --disable-fontconfig \
   --enable-static \
   --disable-shared
 PATH="$BIN_DIR:$PATH" make
