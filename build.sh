@@ -29,11 +29,25 @@ echo "#### FFmpeg static build ####"
 #this is our working directory
 cd $BUILD_DIR
 
-# download \
-#   "master" \
-#   "libass.tar.gz" \
-#   "" \
-#   "https://github.com/libass/libass/tarball"
+
+
+download \
+  "fribidi-0.19.7.tar.bz2" \
+  "" \
+  "" \
+  "http://fribidi.org/download"
+
+download \
+  "fontconfig-2.11.94.tar.gz" \
+  "" \
+  "" \
+  "https://www.freedesktop.org/software/fontconfig/release"
+
+download \
+  "master" \
+  "libass.tar.gz" \
+  "" \
+  "https://github.com/libass/libass/tarball"
 
 download \
   "libvorbis-1.3.5.tar.gz" \
@@ -154,6 +168,22 @@ download \
   "ffmpeg.tar.gz" \
   "" \
   "https://github.com/FFmpeg/FFmpeg/tarball"
+
+
+
+echo "*** Building fribidi ***"
+cd $BUILD_DIR/fribidi-*
+autoreconf -fiv # autoreconf: 'configure.ac' or 'configure.in' is required
+./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+make -j $jval
+make install
+
+echo "*** Building fontconfig ***"
+cd $BUILD_DIR/fontconfig-*
+autoreconf -fiv # autoreconf: 'configure.ac' or 'configure.in' is required
+./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+make -j $jval
+make install
 
 echo "*** Building libvorbis ***"
 cd $BUILD_DIR/libvorbis*
@@ -287,13 +317,15 @@ PATH="$BIN_DIR:$PATH" ./configure --prefix=$TARGET_DIR --enable-static --disable
 PATH="$BIN_DIR:$PATH" make -j $jval
 make install
 
-# echo "*** Building libass ***"
-# cd $BUILD_DIR/libass-libass*
-# autoreconf -fiv
-# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared
-# make -j $jval
-# make install
-#
+echo "*** Building libass ***"
+cd $BUILD_DIR/libass-libass*
+autoreconf -fiv
+./configure --prefix=$TARGET_DIR --enable-static --disable-shared \
+  --disable-dependency-tracking --disable-harfbuzz
+make -j $jval
+make install
+
+
 
 # FFMpeg
 echo "*** Building FFmpeg ***"
@@ -305,12 +337,13 @@ PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --extra-cflags="-I$TARGET_DIR/include" \
   --extra-ldflags="-L$TARGET_DIR/lib" \
   --bindir="$BIN_DIR" \
+  --enable-gpl \
+  --enable-nonfree \
   --disable-doc \
   --disable-ffplay \
   --disable-ffserver \
   --disable-ffprobe \
-  --enable-gpl \
-  --enable-nonfree \
+  --enable-libass \
   --enable-libfreetype \
   --enable-libfdk-aac \
   --enable-libmp3lame \

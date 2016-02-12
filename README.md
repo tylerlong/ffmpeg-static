@@ -47,3 +47,13 @@ means the executable won't work across distributions or even across releases.
 
 
 ## notes
+
+有空慢慢改进吧，不着急：
+
+```
+--enable-version3
+--enable-avisynth
+--enable-fontconfig
+--enable-libbluray
+--enable-libgsm
+```
