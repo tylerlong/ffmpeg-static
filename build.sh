@@ -52,13 +52,31 @@ cd $BUILD_DIR
 #   "" \
 #   "" \
 #   "https://www.freedesktop.org/software/harfbuzz/release"
-#
-# download \
-#   "libpng-1.6.21.tar.gz" \
-#   "" \
-#   "" \
-#   "http://netassist.dl.sourceforge.net/project/libpng/libpng16/1.6.21"
-#
+
+download \
+  "libvorbis-1.3.5.tar.gz" \
+  "" \
+  "" \
+  "http://downloads.xiph.org/releases/vorbis"
+
+download \
+  "libogg-1.3.2.tar.gz" \
+  "" \
+  "" \
+  "http://downloads.xiph.org/releases/ogg"
+
+download \
+  "libtool-2.4.6.tar.gz" \
+  "" \
+  "" \
+  "http://mirror.pregi.net/gnu/libtool"
+
+download \
+  "libpng-1.6.21.tar.gz" \
+  "" \
+  "" \
+  "http://netassist.dl.sourceforge.net/project/libpng/libpng16/1.6.21"
+
 # download \
 #   "gettext-latest.tar.gz" \
 #   "" \
@@ -70,6 +88,18 @@ cd $BUILD_DIR
 #   "" \
 #   "" \
 #   "http://download.savannah.gnu.org/releases/freetype"
+
+download \
+  "SDL2-2.0.4.tar.gz" \
+  "" \
+  "" \
+  "https://www.libsdl.org/release"
+
+download \
+  "libtheora-1.1.1.tar.bz2" \
+  "" \
+  "" \
+  "http://downloads.xiph.org/releases/theora"
 
 download \
   "libiconv-1.14.tar.gz" \
@@ -149,14 +179,33 @@ download \
 # ./configure --prefix=$TARGET_DIR --enable-static --disable-shared
 # make -j $jval
 # make install
-#
-# echo "*** Building libpng ***"
-# cd $BUILD_DIR/libpng*
-# autoreconf -fiv
-# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared
-# make -j $jval
-# make install
-#
+
+echo "*** Building libvorbis ***"
+cd $BUILD_DIR/libvorbis*
+./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+make -j $jval
+make install
+
+echo "*** Building libogg ***"
+cd $BUILD_DIR/libogg*
+autoreconf -fiv
+./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+make -j $jval
+make install
+
+echo "*** Building libtool ***"
+cd $BUILD_DIR/libtool*
+./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+make -j $jval
+make install
+
+echo "*** Building libpng ***"
+cd $BUILD_DIR/libpng*
+autoreconf -fiv
+./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+make -j $jval
+make install
+
 # echo "*** Building gettext ***"
 # cd $BUILD_DIR/gettext-*
 # autoreconf -fiv
@@ -183,6 +232,20 @@ download \
 # ./configure --prefix=$TARGET_DIR --enable-static --disable-shared
 # make -j $jval
 # make install
+
+echo "*** Building SDL2 ***"
+cd $BUILD_DIR/SDL2-*
+./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+make -j $jval
+make install
+
+echo "*** Building libtheora ***"
+cd $BUILD_DIR/libtheora-*
+./configure --prefix=$TARGET_DIR --enable-static --disable-shared \
+  --disable-oggtest --disable-dependency-tracking --disable-vorbistest \
+  --disable-examples
+make -j $jval
+make install
 
 echo "*** Building iconv ***"
 cd $BUILD_DIR/libiconv-*
@@ -293,9 +356,7 @@ PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --disable-libxcb-shm \
   --disable-libxcb-xfixes \
   --disable-libxcb-shape \
-  --disable-sdl \
   --disable-libvorbis \
-  --disable-libtheora \
   --enable-static \
   --disable-shared
 PATH="$BIN_DIR:$PATH" make
