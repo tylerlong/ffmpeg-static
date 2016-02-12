@@ -348,6 +348,8 @@ PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --enable-libx265 \
   --disable-securetransport \
   --disable-indev=qtkit \
+  \
+  \
   --disable-xlib \
   --disable-indev=x11grab_xcb \
   --disable-indev=x11grab \
@@ -356,6 +358,8 @@ PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --disable-libxcb-shm \
   --disable-libxcb-xfixes \
   --disable-libxcb-shape \
+  \
+  \
   --enable-static \
   --disable-shared
 PATH="$BIN_DIR:$PATH" make

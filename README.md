@@ -46,10 +46,9 @@ means the executable won't work across distributions or even across releases.
       /usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 125.2.0)
 
 
-## todo
+## notes
 
-- Add some tests to check that video output is correctly generated
-  - this would help upgrading the package without too much work
-- OSX's xvidcore does not detect yasm correctly
-- remove remaining libs
-- Don't disable so many libs
+```
+brew uninstall glib
+brew install glib --with-static
+```
