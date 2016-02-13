@@ -29,26 +29,6 @@ echo "#### FFmpeg static build ####"
 #this is our working directory
 cd $BUILD_DIR
 
-
-
-# download \
-#   "fribidi-0.19.7.tar.bz2" \
-#   "" \
-#   "" \
-#   "http://fribidi.org/download"
-
-# download \
-#   "fontconfig-2.11.94.tar.gz" \
-#   "" \
-#   "" \
-#   "https://www.freedesktop.org/software/fontconfig/release"
-#
-# download \
-#   "master" \
-#   "libass.tar.gz" \
-#   "" \
-#   "https://github.com/libass/libass/tarball"
-
 download \
   "libvorbis-1.3.5.tar.gz" \
   "" \
@@ -72,12 +52,6 @@ download \
   "" \
   "" \
   "http://netassist.dl.sourceforge.net/project/libpng/libpng16/1.6.21"
-
-# download \
-#   "gettext-latest.tar.gz" \
-#   "" \
-#   "" \
-#   "http://ftp.gnu.org/pub/gnu/gettext"
 
 download \
   "freetype-2.6.3.tar.gz" \
@@ -171,13 +145,6 @@ download \
 
 
 
-# echo "*** Building fribidi ***"
-# cd $BUILD_DIR/fribidi-*
-# autoreconf -fiv # autoreconf: 'configure.ac' or 'configure.in' is required
-# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared
-# make -j $jval
-# make install
-
 echo "*** Building libvorbis ***"
 cd $BUILD_DIR/libvorbis*
 ./configure --prefix=$TARGET_DIR --enable-static --disable-shared
@@ -204,34 +171,11 @@ autoreconf -fiv
 make -j $jval
 make install
 
-# echo "*** Building gettext ***"
-# cd $BUILD_DIR/gettext-*
-# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared \
-#   --disable-dependency-tracking \
-#   --disable-silent-rules \
-#   --disable-debug \
-#   --disable-java \
-#   --disable-csharp \
-#   --without-git \
-#   --without-cvs \
-#   --without-xz \
-#   --without-glib
-# make -j $jval
-# make install
-
 echo "*** Building freetype ***"
 cd $BUILD_DIR/freetype-*
 ./configure --prefix=$TARGET_DIR --enable-static --disable-shared --without-harfbuzz
 make -j $jval
 make install
-
-# echo "*** Building fontconfig ***"
-# cd $BUILD_DIR/fontconfig-*
-# autoreconf -fiv # autoreconf: 'configure.ac' or 'configure.in' is required
-# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared \
-#   --disable-dependency-tracking
-# make -j $jval
-# make install
 
 echo "*** Building SDL2 ***"
 cd $BUILD_DIR/SDL2-*
@@ -313,14 +257,6 @@ cd $BUILD_DIR/libvpx*
 PATH="$BIN_DIR:$PATH" ./configure --prefix=$TARGET_DIR --enable-static --disable-shared --disable-examples --disable-unit-tests
 PATH="$BIN_DIR:$PATH" make -j $jval
 make install
-
-# echo "*** Building libass ***"
-# cd $BUILD_DIR/libass-libass*
-# autoreconf -fiv
-# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared \
-#   --disable-dependency-tracking --disable-harfbuzz
-# make -j $jval
-# make install
 
 
 
