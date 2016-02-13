@@ -31,23 +31,23 @@ cd $BUILD_DIR
 
 
 
-download \
-  "fribidi-0.19.7.tar.bz2" \
-  "" \
-  "" \
-  "http://fribidi.org/download"
+# download \
+#   "fribidi-0.19.7.tar.bz2" \
+#   "" \
+#   "" \
+#   "http://fribidi.org/download"
 
-download \
-  "fontconfig-2.11.94.tar.gz" \
-  "" \
-  "" \
-  "https://www.freedesktop.org/software/fontconfig/release"
-
-download \
-  "master" \
-  "libass.tar.gz" \
-  "" \
-  "https://github.com/libass/libass/tarball"
+# download \
+#   "fontconfig-2.11.94.tar.gz" \
+#   "" \
+#   "" \
+#   "https://www.freedesktop.org/software/fontconfig/release"
+#
+# download \
+#   "master" \
+#   "libass.tar.gz" \
+#   "" \
+#   "https://github.com/libass/libass/tarball"
 
 download \
   "libvorbis-1.3.5.tar.gz" \
@@ -171,19 +171,12 @@ download \
 
 
 
-echo "*** Building fribidi ***"
-cd $BUILD_DIR/fribidi-*
-autoreconf -fiv # autoreconf: 'configure.ac' or 'configure.in' is required
-./configure --prefix=$TARGET_DIR --enable-static --disable-shared
-make -j $jval
-make install
-
-echo "*** Building fontconfig ***"
-cd $BUILD_DIR/fontconfig-*
-autoreconf -fiv # autoreconf: 'configure.ac' or 'configure.in' is required
-./configure --prefix=$TARGET_DIR --enable-static --disable-shared
-make -j $jval
-make install
+# echo "*** Building fribidi ***"
+# cd $BUILD_DIR/fribidi-*
+# autoreconf -fiv # autoreconf: 'configure.ac' or 'configure.in' is required
+# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared
+# make -j $jval
+# make install
 
 echo "*** Building libvorbis ***"
 cd $BUILD_DIR/libvorbis*
@@ -213,20 +206,16 @@ make install
 
 # echo "*** Building gettext ***"
 # cd $BUILD_DIR/gettext-*
-# autoreconf -fiv
 # ./configure --prefix=$TARGET_DIR --enable-static --disable-shared \
 #   --disable-dependency-tracking \
 #   --disable-silent-rules \
 #   --disable-debug \
-#   --with-included-gettext \
-#   --with-included-glib \
-#   --with-included-libcroco \
-#   --with-included-libunistring \
 #   --disable-java \
 #   --disable-csharp \
 #   --without-git \
 #   --without-cvs \
-#   --without-xz
+#   --without-xz \
+#   --without-glib
 # make -j $jval
 # make install
 
@@ -235,6 +224,14 @@ cd $BUILD_DIR/freetype-*
 ./configure --prefix=$TARGET_DIR --enable-static --disable-shared --without-harfbuzz
 make -j $jval
 make install
+
+# echo "*** Building fontconfig ***"
+# cd $BUILD_DIR/fontconfig-*
+# autoreconf -fiv # autoreconf: 'configure.ac' or 'configure.in' is required
+# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared \
+#   --disable-dependency-tracking
+# make -j $jval
+# make install
 
 echo "*** Building SDL2 ***"
 cd $BUILD_DIR/SDL2-*
@@ -317,13 +314,13 @@ PATH="$BIN_DIR:$PATH" ./configure --prefix=$TARGET_DIR --enable-static --disable
 PATH="$BIN_DIR:$PATH" make -j $jval
 make install
 
-echo "*** Building libass ***"
-cd $BUILD_DIR/libass-libass*
-autoreconf -fiv
-./configure --prefix=$TARGET_DIR --enable-static --disable-shared \
-  --disable-dependency-tracking --disable-harfbuzz
-make -j $jval
-make install
+# echo "*** Building libass ***"
+# cd $BUILD_DIR/libass-libass*
+# autoreconf -fiv
+# ./configure --prefix=$TARGET_DIR --enable-static --disable-shared \
+#   --disable-dependency-tracking --disable-harfbuzz
+# make -j $jval
+# make install
 
 
 
@@ -338,12 +335,12 @@ PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --extra-ldflags="-L$TARGET_DIR/lib" \
   --bindir="$BIN_DIR" \
   --enable-gpl \
+  --enable-version3 \
   --enable-nonfree \
   --disable-doc \
   --disable-ffplay \
   --disable-ffserver \
   --disable-ffprobe \
-  --enable-libass \
   --enable-libfreetype \
   --enable-libfdk-aac \
   --enable-libmp3lame \
