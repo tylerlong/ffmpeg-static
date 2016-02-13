@@ -30,6 +30,12 @@ echo "#### FFmpeg static build ####"
 cd $BUILD_DIR
 
 download \
+  "fontconfig-2.11.94.tar.gz" \
+  "" \
+  "" \
+  "https://www.freedesktop.org/software/fontconfig/release"
+
+download \
   "libvorbis-1.3.5.tar.gz" \
   "" \
   "" \
@@ -144,6 +150,14 @@ download \
   "https://github.com/FFmpeg/FFmpeg/tarball"
 
 
+
+echo "*** Building fontconfig ***"
+cd $BUILD_DIR/fontconfig-*
+autoreconf -fiv # autoreconf: 'configure.ac' or 'configure.in' is required
+./configure --prefix=$TARGET_DIR --enable-static --disable-shared \
+  --disable-dependency-tracking
+make -j $jval
+make install
 
 echo "*** Building libvorbis ***"
 cd $BUILD_DIR/libvorbis*
@@ -277,6 +291,8 @@ PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --disable-ffplay \
   --disable-ffserver \
   --disable-ffprobe \
+  --enable-iconv \
+  --enable-fontconfig \
   --enable-libfreetype \
   --enable-libfdk-aac \
   --enable-libmp3lame \

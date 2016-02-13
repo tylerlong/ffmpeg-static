@@ -50,12 +50,6 @@ means the executable won't work across distributions or even across releases.
 
 有空慢慢改进吧，不着急：
 
-```
---enable-avisynth
---enable-libbluray
---enable-libgsm
-```
-
 
 ## issues
 
