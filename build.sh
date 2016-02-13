@@ -30,6 +30,12 @@ echo "#### FFmpeg static build ####"
 cd $BUILD_DIR
 
 download \
+  "expat-2.1.0.tar.gz" \
+  "" \
+  "" \
+  "http://downloads.sourceforge.net/project/expat/expat/2.1.0"
+
+download \
   "fontconfig-2.11.94.tar.gz" \
   "" \
   "" \
@@ -150,6 +156,14 @@ download \
   "https://github.com/FFmpeg/FFmpeg/tarball"
 
 
+
+echo "*** Building expat ***"
+cd $BUILD_DIR/expat-*
+autoreconf -fiv # autoreconf: 'configure.ac' or 'configure.in' is required
+./configure --prefix=$TARGET_DIR --enable-static --disable-shared \
+  --disable-dependency-tracking
+make -j $jval
+make install
 
 echo "*** Building fontconfig ***"
 cd $BUILD_DIR/fontconfig-*
